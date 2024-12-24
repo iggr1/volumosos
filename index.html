@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://apis.google.com https://accounts.google.com 'nonce-randomNonceValue'">
+
+        <script src="https://apis.google.com/js/api.js"></script>
+
+        <title>Sorting de Volumosos - SPX HUB Chapecó</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                background-color: #f4f4f4;
+            }
+
+            header {
+                text-align: center;
+            }
+
+            h1 {
+                font-size: 20px;
+            }
+
+            .input-container {
+                margin-bottom: 20px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+
+            input[type="text"] {
+                padding: 10px;
+                font-size: 1em;
+                width: 300px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+
+            .cities {
+                display: flex;
+                gap: 20px;
+            }
+
+            .column {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .column button {
+                padding: 10px;
+                font-size: 20px;
+                font-weight: bold;
+                background-color: #ff6000;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+                pointer-events: none;
+                opacity: 0.5;
+            }
+
+            .column button.active {
+                pointer-events: auto;
+                opacity: 1;
+            }
+
+            .column button:hover {
+                background-color: #646464;
+            }
+
+            #reader {
+                width: 250px !important;
+                height: 200px !important;
+                margin-bottom: 130px;
+            }
+
+            /* Modal Styles */
+            #modal {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.7);
+                justify-content: center;
+                align-items: center;
+                z-index: 1000;
+            }
+
+            #modal-content {
+                background-color: white;
+                padding: 20px;
+                border-radius: 10px;
+                width: 80%;
+                max-width: 500px;
+                text-align: center;
+            }
+
+            #modal h3 {
+                margin-bottom: 20px;
+            }
+
+            #modal-buttons {
+                display: grid;
+                grid-template-columns: repeat(5, 1fr);
+                gap: 10px;
+            }
+
+            #modal-buttons button {
+                padding: 10px;
+                font-size: 16px;
+                border: none;
+                background-color: #ff6000;
+                color: white;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+
+            #modal-buttons button:hover {
+                background-color: #646464;
+            }
+
+            #modal-close {
+                margin-top: 20px;
+                padding: 10px;
+                background-color: #333;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+            #modal-close:hover {
+                background-color: #646464;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h3>Sorting de Volumosos</h3>
+            <p>SPX HUB Chapecó</p>
+        </header>
+
+        <div id="reader" style="width: 300px;"></div>
+
+        <div class="input-container">
+            <input type="text" id="codigo" name="codigo" placeholder="BRXXXXXXXXXXXXX" pattern="BR[A-Za-z0-9]{13}" required oninput="validarCodigo()">
+        </div>
+
+        <div class="cities">
+            <div class="column">
+                <button id="btn-cacador" onclick="verificarCodigo('Caçador')">Caçador</button>
+                <button id="btn-videira" onclick="verificarCodigo('Videira')">Videira</button>
+                <button id="btn-concordia" onclick="verificarCodigo('Concórdia')">Concórdia</button>
+                <button id="btn-frederico" onclick="verificarCodigo('Frederico W.')">Frederico W.</button>
+            </div>
+            <div class="column">
+                <button id="btn-modelo" onclick="verificarCodigo('Modelo')">Modelo</button>
+                <button id="btn-sao-miguel" onclick="verificarCodigo('São Miguel D. O.')">São Miguel D. O.</button>
+                <button id="btn-chapeco" onclick="abrirModal()">Chapecó</button>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div id="modal">
+            <div id="modal-content">
+                <h3>Qual pallet?</h3>
+                <div id="modal-buttons">
+                    <!-- Buttons will be dynamically generated -->
+                </div>
+                <button id="modal-close" onclick="fecharModal()">Fechar</button>
+            </div>
+        </div>
+
+        <script nonce="randomNonceValue" src="./js/script.js"></script>
+    </body>
+</html>
